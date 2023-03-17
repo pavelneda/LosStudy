@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import ApiService from "../../services/api-service";
 import Pagination from "../pagination/pagination";
 import Spinner from "../spinner/spinner";
@@ -33,7 +35,6 @@ export default class Courses extends Component {
                     loading: false
                 });
             });
-        console.log(this.props)
     }
 
     componentDidUpdate() {
@@ -84,9 +85,9 @@ export default class Courses extends Component {
                         <ul className="courses-skills">{skills}</ul>
                         <span className="courses-data"><i className="fa-regular fa-clock"></i>Number of lessons: {lessonsCount}</span>
                         <span className="courses-data"><i className="fa-regular fa-star"></i>Rating: {rating}</span>
-                        <a href="tel:+380982284569" className="btn courses-btn">
+                        <Link to={`/${id}`} className="btn courses-btn">
                             View this course
-                        </a>
+                        </Link>
                     </div>
                 </div>
             );
@@ -109,7 +110,7 @@ export default class Courses extends Component {
         return (
             <section className="courses">
                 <div className="container">
-                    <h2 className="intro-right-title courses-title" >Our courses</h2>
+                    <h2 className="section-title courses-title" >Our courses</h2>
 
                     <div className="courses-list">
                         {items}

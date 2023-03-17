@@ -114,13 +114,13 @@
 .nav{
     font-family: 'Marmelad', sans-serif;
     font-size: 28px;
-    margin-left: -3px;
 }
 
 .nav-link{
     color:#000000;
     text-decoration: none;
     margin-right: 25px;
+    user-select: none;
 
     opacity: 0.75;
     transition: opacity .2s linear;

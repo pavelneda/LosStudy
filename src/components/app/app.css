@@ -1,9 +1,23 @@
-body{
+html,
+body {
+    height: 100%;
+}
+
+#root {
+    position: relative;
+    min-height: 100%;
+}
+
+#root-inner {
+    padding-bottom: 133px;
+}
+
+body {
     margin: 0;
     font-family: 'Antonio', sans-serif;
 
     font-size: 27px;
-    color:#000000;
+    color: #000000;
     line-height: 1.5;
 
 }
@@ -11,26 +25,31 @@ body{
 
 *,
 *::after,
-*::before{
+*::before {
     box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0;
 }
 
 
-a{
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+a {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 /*Button*/
 
-.scroll-btn{
+.scroll-btn {
     cursor: pointer;
 }
 
-.btn{
+.btn {
     display: inline-block;
     vertical-align: top;
     background: #0085FF;
@@ -38,53 +57,55 @@ a{
     padding: 1px 55px 9px 55px;
 
     text-decoration: none;
-    color:#ffffff;
+    color: #ffffff;
 
     font-size: 27px;
     line-height: 148%;
-    text-align: center; 
+    text-align: center;
 
     transition: background-color 0.2s linear;
 }
 
-.btn span{
+.btn span {
     margin-left: 5px;
     display: inline-block
 }
 
 
-.btn:hover, .call-button:hover{
+.btn:hover,
+.call-button:hover {
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     background-color: #006fd8;
 }
 
-.btn:active, .call-button:active{
+.btn:active,
+.call-button:active {
     background-color: #0078e9;
     box-shadow: 0 0 0 3px #000000;
 }
 
-.fa-phone{
+.fa-phone {
     transition: color 0.2s linear;
 }
 
-.fa-phone:hover{
+.fa-phone:hover {
     color: #608c51;
 }
 
 
-.burger-menu{
-    display:none;
+.burger-menu {
+    display: none;
 }
 
-.cross{
+.cross {
     display: none;
 }
 
 /*Container*/
-.container{
+.container {
     width: 100%;
     max-width: 1363px;
-    margin: 0 auto ;
+    margin: 0 auto;
     padding: 0 30px;
 
     overflow: hidden;
@@ -93,20 +114,22 @@ a{
 
 /*Section*/
 
-.section-header{
+.section-header {
     text-align: center;
 }
 
-.section-title{
+.section-title {
     font-family: 'Marmelad', sans-serif;
     font-weight: 400;
     font-size: 48px;
     line-height: 125%;
+    text-align: center;
+
 }
 
-.section-text{
+.section-text {
     font-size: 27px;
-    line-height: 107%;  
+    line-height: 107%;
 
     opacity: 0.8;
 

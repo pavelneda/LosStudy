@@ -25,7 +25,7 @@ export default class ApiService {
         };
 
         const res = await this.getResource(`/core/preview-courses`, requestOptions)
-        return res.courses.map(this._transformCourse);
+        return res.courses.map(this._transformCourseForList);
     }
 
     async getCourse(id) {
@@ -39,7 +39,7 @@ export default class ApiService {
         return this._transformCourse(course);
     }
 
-    _transformCourse = (course) => {
+    _transformCourseForList = (course) => {
         return {
             id: course.id,
             title: course.title,
@@ -47,6 +47,25 @@ export default class ApiService {
             lessonsCount: course.lessonsCount,
             rating: course.rating,
             skills: course.meta.skills
+        }
+    }
+
+    _transformCourse = (course) => {
+        return {
+            id: course.id,
+            title: course.title,
+            description: course.description,
+            lessons: course.lessons.map(this._transformLesson)
+        }
+    }
+
+    _transformLesson = (lesson) => {
+        return {
+            id: lesson.id,
+            title: lesson.title,
+            order: lesson.order,
+            status: lesson.status,
+            link: lesson.link,
         }
     }
 }
