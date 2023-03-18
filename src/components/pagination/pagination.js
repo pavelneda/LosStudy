@@ -20,7 +20,7 @@ const Pagination = ({ coursesPerPage, totalCourses, paginate, onClickNext, onCli
                     </li>
                 ))
             }
-            <button className="btn pagination-btn next" onClick={() => onClickNext()}>
+            <button className="btn pagination-btn next" onClick={onClickNext}>
                 <i className="fa-solid fa-arrow-right"></i>
             </button>
         </ul>

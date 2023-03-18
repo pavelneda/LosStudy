@@ -1,10 +1,10 @@
 /*Courses*/
 
-.courses-title{
+.courses-title {
     font-size: 55px;
 }
 
-.courses{
+.courses {
     width: 100%;
     height: auto;
     background-color: #F6F8FA;
@@ -12,7 +12,7 @@
     padding-top: 70px;
 }
 
-.courses-list{
+.courses-list {
     margin: 80px 0;
 
     display: flex;
@@ -21,27 +21,31 @@
     justify-content: center;
 }
 
-.courses-item{
+.courses-item {
     position: relative;
-    background-color: white ;
-    width:375px;
-    height:auto;
+    background-color: white;
+    width: 375px;
+    height: auto;
     text-align: center;
 
     border-radius: 20px;
     filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.25));
 }
 
-.courses-item-img{
+.courses-item-img {
     padding: 0 0 53% 0;
     overflow: hidden;
     position: relative;
     border-radius: 20px 20px 0 0;
 }
 
-.courses-item-img img{
-    width:100%;
-    height:100%;
+.courses-item:hover .courses-item-video-wrapper{
+    display: block;
+}
+
+.courses-item-img img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 
     position: absolute;
@@ -49,7 +53,7 @@
     left: 0;
 }
 
-.courses-info{
+.courses-info {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,7 +62,7 @@
     height: auto;
 }
 
-.courses-name{
+.courses-name {
     font-family: 'Marmelad', sans-serif;
     font-weight: 400;
     font-size: 30px;
@@ -67,7 +71,7 @@
     margin-top: 15px;
 }
 
-.courses-skills{
+.courses-skills {
     text-align: left;
     font-size: 20px;
     padding: 0;
@@ -77,29 +81,46 @@
     opacity: 0.8;
 }
 
-.courses-data{
+.courses-skills li::first-letter{
+    text-transform:capitalize;
+}
+
+.courses-data {
     display: inline-block;
     font-size: 20px;
     line-height: 140%;
     opacity: 0.5;
 }
 
-.courses-data i{
+.courses-data i {
     margin-right: 5px;
     position: relative;
     top: -2px;
 }
 
-.courses-btn{
+.courses-btn {
     font-size: 25px !important;
     padding: 2px 35px 9px 35px !important;
 
     position: absolute;
     bottom: 30px;
 }
-.courses-spinner{
+
+.courses-spinner {
     display: flex;
     justify-content: center;
     background-color: #F6F8FA;
-    padding:5% 0 0 0;
+    padding: 5% 0 0 0;
 }
+
+.courses-item-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.courses-item-video-wrapper {
+    position: relative;
+    display: none;
+}
+

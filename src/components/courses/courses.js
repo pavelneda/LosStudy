@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import ReactPlayer from 'react-player';
 
 import ApiService from "../../services/api-service";
 import Pagination from "../pagination/pagination";
@@ -8,36 +9,64 @@ import './courses.css';
 
 function offset(el) {
     let rect = el.getBoundingClientRect(),
-    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
 }
 
-export default class Courses extends Component {
+function withParamsAndNavigate(Component) {
+    return props => <Component {...props} params={useParams()} />;
+}
+
+const withNavigateHook = (Component) => {
+    return (props) => {
+        const navigation = useNavigate();
+        return <Component navigation={navigation} {...props} />
+    }
+}
+
+class Courses extends Component {
 
     apiService = new ApiService();
     _coord = null;
 
     state = {
-        courseList: null,
-        loading: true,
         currentPage: 1,
         coursesPerPage: 10,
         coordPagination: 0
     };
 
     componentDidMount() {
-        this.apiService
-            .getAllCourses()
-            .then((courseList) => {
-                this.setState({
-                    courseList,
-                    loading: false
+        let page = null;
+        if (!!this.props.params.page && Number.isInteger(parseInt(this.props.params.page)))
+            page = this.props.params.page;
+        if (!this.props.courseList)
+            this.apiService
+                .getAllCourses()
+                .then((courseList) => {
+                    this.props.onCoursesLoaded(courseList);
+                    if (page)
+                        this.setState({ currentPage: page })
                 });
-            });
+        else {
+            if (page)
+                this.setState({ currentPage: page })
+            else
+                this.updatePagination();
+        }
+
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
+        if (!!document.location.pathname.slice(1) && this.state.currentPage != document.location.pathname.slice(1)) {
+            this.setState({
+                currentPage: document.location.pathname.slice(1)
+            })
+        }
+        this.updatePagination();
+    }
+
+    updatePagination = () => {
         const pagination = document.querySelector('.pagination');
         const coordPagination = offset(pagination);
 
@@ -55,19 +84,26 @@ export default class Courses extends Component {
         this._coord = coordPagination;
     }
 
-    paginate = (pageNumber) => this.setState({ currentPage: pageNumber });
+    paginate = (pageNumber) => {
+        this.props.navigation(`/${pageNumber}`);
+        this.setState({ currentPage: pageNumber });
+    }
     nextPage = () => this.setState((state) => {
-        if (state.currentPage != Math.ceil(state.courseList.length / state.coursesPerPage))
-            return { currentPage: state.currentPage + 1 }
+        if (state.currentPage != Math.ceil(this.props.courseList.length / state.coursesPerPage)) {
+            this.props.navigation(`/${parseInt(state.currentPage) + 1}`);
+            return { currentPage: parseInt(state.currentPage) + 1 }
+        }
     });
+
     prevPage = () => this.setState((state) => {
-        if (state.currentPage != 1)
-            return { currentPage: state.currentPage - 1 }
+        if (state.currentPage != 1) {
+            this.props.navigation(`/${parseInt(state.currentPage) - 1}`);
+            return { currentPage: parseInt(state.currentPage) - 1 }
+        }
     });
-    
 
     renderItems(arr) {
-        return arr.map(({ id, title, img, lessonsCount, rating, skills }) => {
+        return arr.map(({ id, title, img, lessonsCount, rating, skills, courseVideoPreview }) => {
 
             if (skills) {
                 skills = skills.map((skill) => (
@@ -79,13 +115,24 @@ export default class Courses extends Component {
                 <div className="courses-item" key={id}>
                     <div className="courses-item-img">
                         <img src={img} alt={title} />
+                        {courseVideoPreview && <div className="courses-item-video-wrapper">
+                            <ReactPlayer
+                                loop={true}
+                                playing={true}
+                                muted={true}
+                                className="courses-item-video"
+                                url={courseVideoPreview}
+                                width='100%'
+                                height='auto'
+                            />
+                        </div>}
                     </div>
                     <div className="courses-info">
                         <h3 className="courses-name">{title}</h3>
                         <ul className="courses-skills">{skills}</ul>
                         <span className="courses-data"><i className="fa-regular fa-clock"></i>Number of lessons: {lessonsCount}</span>
                         <span className="courses-data"><i className="fa-regular fa-star"></i>Rating: {rating}</span>
-                        <Link to={`/${id}`} className="btn courses-btn">
+                        <Link to={`/course/${id}`} className="btn courses-btn">
                             View this course
                         </Link>
                     </div>
@@ -96,15 +143,15 @@ export default class Courses extends Component {
 
     render() {
 
-        const { courseList, loading, coursesPerPage, currentPage } = this.state;
-        if (loading) {
+        const { coursesPerPage, currentPage } = this.state;
+        const { isLoading, courseList } = this.props
+        if (isLoading) {
             return (<div className="courses-spinner"><Spinner /></div>);
         }
 
         const lastCourseIndex = currentPage * coursesPerPage;
         const firstCourseIndex = lastCourseIndex - coursesPerPage;
         const currentCourses = courseList.slice(firstCourseIndex, lastCourseIndex)
-
         const items = this.renderItems(currentCourses);
 
         return (
@@ -128,3 +175,5 @@ export default class Courses extends Component {
         );
     }
 }
+
+export default withParamsAndNavigate(withNavigateHook(Courses));

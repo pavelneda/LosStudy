@@ -89,3 +89,8 @@
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+.course-page-instruction{
+    opacity: 0.5;
+    font-size: 0.8em;
+}

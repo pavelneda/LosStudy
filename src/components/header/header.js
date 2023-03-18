@@ -9,7 +9,7 @@ const Header = () => {
                 <div className="header-top">
 
                     <Link to="/" className="header-logo">
-                        <img src="images/logo.png" alt="" />
+                        <img src="/images/logo.png" alt="Logo" />
                         <span className="header-logo-text">LosStudy</span>
                     </Link>
                     
@@ -21,7 +21,7 @@ const Header = () => {
 
 
                     <a href="#" className="header-lang">
-                        <img src="images/language.png" alt="" />
+                        <img src="/images/language.png" alt="Language" />
                         <div className="header-lang-text">
                             ukraine
                         </div>

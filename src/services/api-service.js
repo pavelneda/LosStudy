@@ -44,6 +44,7 @@ export default class ApiService {
             id: course.id,
             title: course.title,
             img: course.previewImageLink + '/cover.webp',
+            courseVideoPreview : course.meta.courseVideoPreview && course.meta.courseVideoPreview.link,
             lessonsCount: course.lessonsCount,
             rating: course.rating,
             skills: course.meta.skills

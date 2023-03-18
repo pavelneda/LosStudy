@@ -20,16 +20,27 @@ import PeoplePage from "../people-page/people-page";
 export default class App extends Component {
 
    state = {
-      hasError: false
+      hasError: false,
+      courseList: null,
+      isLoading: true,
    };
 
    componentDidCatch() {
       this.setState({ hasError: true });
    }
 
-   render() {
+   onCoursesLoaded = (courseList) => {
+      this.setState({
+         courseList: courseList,
+         isLoading: false,
+      });
+   };
 
-      if (this.state.hasError) {
+
+   render() {
+      const { hasError, isLoading, courseList } = this.state;
+
+      if (hasError) {
          return <ErrorIndicator />;
       }
 
@@ -37,13 +48,16 @@ export default class App extends Component {
          <div id="root-inner">
             <Header />
             <Routes>
-               <Route path="/" element={
+               <Route path="/:page?" element={
                   <>
-                     <Courses />
+                     <Courses
+                        isLoading={isLoading}
+                        courseList={courseList}
+                        onCoursesLoaded={this.onCoursesLoaded}/>
                      <About />
                   </>
                } />
-               <Route path="/:id" element={<CoursePage />} />
+               <Route path="/course/:id" element={<CoursePage />} />
             </Routes>
             <Footer />
          </div>
