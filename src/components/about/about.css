@@ -1,120 +1,367 @@
 /*Statistic*/
 
-.statistic{
+.statistic {
     background-color: #F6F8FA;
     padding: 72px 0 74px 0;
 }
 
-.stat{
+.stat {
     margin-top: 86px;
 
     display: flex;
     justify-content: space-between;
 }
 
-.stat-item{
+.stat-item {
     text-align: center;
     padding-bottom: 5px;
 }
 
-.stat-item:first-child{
+.stat-item:first-child {
     margin-left: -4px;
 }
 
-.stat-item:last-child{
+.stat-item:last-child {
     margin-right: -13px;
 }
 
-.stat-title{
+.stat-title {
     font-weight: 400;
     font-size: 72px;
     line-height: 1;
 
 }
 
-.stat-text{
+.stat-text {
     font-size: 25px;
     line-height: 112%;
 
     opacity: 0.6;
 
-    width:100%;
+    width: 100%;
     max-width: 186px;
-    margin:21px auto 0 auto;
+    margin: 21px auto 0 auto;
 }
 
 
 
 /*Call*/
-.call{
+.call {
     padding-top: 72px;
 }
 
-.call-iner{
-    display:flex;
+.call-iner {
+    display: flex;
     padding: 130px 0;
 }
 
-.call-numbers{
+.call-numbers {
     font-size: 64px;
-    
+
     margin-right: auto;
     margin-left: auto;
 }
 
-.call-numbers i{
-    display:inline-block;
+.call-numbers i {
+    display: inline-block;
     vertical-align: center;
-    font-size:57px ;
+    font-size: 57px;
     color: #78BC61;
     transform: translateY(-5px);
 }
 
 
-.call-form{
+.call-form {
     max-width: 431px;
     width: 100%;
 }
 
-.call-input{   
-    width:100%; 
-    border:0;
+.call-input {
+    width: 100%;
+    border: 0;
     font-family: 'Antonio', sans-serif;
     font-size: 64px;
 
     margin-bottom: 49px;
 }
 
-.call-input::placeholder{
-    color:#000000;
+.call-input::placeholder {
+    color: #000000;
 }
 
-.call-input:focus{
+.call-input:focus {
     outline: 0;
 }
 
-.call-button{
+.call-button {
     display: block;
 
     width: 100%;
     height: 69px;
-    border:0;
-    cursor:pointer;
+    border: 0;
+    cursor: pointer;
 
     background: #0085FF;
     border-radius: 7px;
     padding: 1px 0 9px 0;
 
-    color:#ffffff;
+    color: #ffffff;
 
     font-family: 'Antonio', sans-serif;
     font-size: 27px;
     line-height: 148%;
-    text-align: center; 
+    text-align: center;
 
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.number:last-child{
+.number:last-child {
     margin-top: 20px;
+}
+
+
+@media (max-width: 1300px) {
+
+    /*Statistic*/
+    .statistic {
+        padding: 62px 0 44px 0;
+    }
+
+    .stat {
+        margin-bottom: 56px;
+    }
+
+    .stat-item:last-child {
+        margin-right: -26px;
+    }
+
+    .stat-title {
+        font-size: 60px;
+    }
+
+    .stat-text {
+        font-size: 22px;
+        line-height: 1.15;
+    }
+
+    /*Call*/
+
+    .call-numbers {
+        font-size: 47px;
+    }
+
+    .call-numbers i {
+        font-size: 42px;
+    }
+
+    .call-input {
+        font-size: 47px;
+        margin-bottom: 42px;
+    }
+
+    .call-button {
+        height: 55px;
+        font-size: 24px;
+    }
+
+    .call-form {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .call-iner {
+        padding: 92px 0;
+    }
+}
+
+@media (max-width: 992px) {
+
+    /*Statistic*/
+    .statistic {
+        padding-bottom: 0;
+    }
+
+    .stat {
+        flex-wrap: wrap;
+        margin-bottom: 0;
+    }
+
+    .stat-item {
+        width: 50%;
+        margin-bottom: 80px;
+    }
+
+    .stat-item:first-child {
+        margin-left: 0;
+    }
+
+    .stat-item:last-child {
+        margin-right: 0;
+    }
+
+    /*Call*/
+    .call-iner {
+        flex-direction: column;
+    }
+
+    .call-form {
+        margin-bottom: 80px;
+    }
+
+    .number:last-child {
+        margin-top: 7px;
+    }
+
+    .call-input {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /*Statistic*/
+    .stat {
+        margin-top: 46px;
+    }
+
+    .stat-title {
+        font-size: 46px;
+    }
+
+    .stat-text {
+        font-size: 20px;
+        padding: 0 3px;
+    }
+
+    .stat-item {
+        margin-bottom: 40px;
+    }
+
+    /*Call*/
+
+    .call-numbers {
+        font-size: 43px;
+    }
+
+    .call-input {
+        font-size: 43px;
+    }
+
+    .call-form {
+        max-width: 290px;
+        margin-bottom: 50px;
+
+    }
+
+    .call-button {
+        height: 52px;
+        font-size: 22px;
+        margin-left: 3px;
+    }
+
+    .call-iner {
+        padding: 62px 0;
+    }
+
+    .call-numbers i {
+        font-size: 37px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    /*Call*/
+    .call-numbers {
+        font-size: 39px;
+    }
+
+    .call-input {
+        font-size: 39px;
+    }
+
+    .call-form {
+        max-width: 263px;
+    }
+
+    .call-button {
+        height: 51px;
+        font-size: 21px;
+        margin-left: 3px;
+    }
+
+    .call-iner {
+        padding-top: 42px;
+    }
+
+    .call-numbers i {
+        font-size: 34px;
+        transform: translateY(-4px);
+
+    }
+}
+
+@media (max-width: 425px) {
+
+    /*Statistic*/
+    .stat {
+        margin-top: 35px;
+    }
+
+    .statistic {
+        padding-top: 32px;
+    }
+
+    .stat-item {
+        width: 100%;
+        margin-bottom: 25px;
+
+    }
+
+    .stat-title {
+        font-size: 36px;
+    }
+
+    .stat-text {
+        font-size: 16px;
+        margin-top: 8px;
+    }
+
+    .stat-item:last-child {
+        margin-bottom: 35px;
+    }
+
+    /*Call*/
+    .call-numbers {
+        font-size: 36px;
+    }
+
+    .call-numbers i {
+        font-size: 31px;
+        transform: translateY(-4px);
+
+    }
+
+    .call-input {
+        font-size: 36px;
+        margin-bottom: 20px;
+
+    }
+
+    .call-form {
+        max-width: 245px;
+    }
+
+    .call-button {
+        height: 49px;
+        font-size: 20px;
+        margin-left: 3px;
+        padding-top: 3px;
+    }
+}
+
+@media(max-width:350px){
+    /*Call*/
+    .call-numbers i{
+        display: none;
+    }
 }

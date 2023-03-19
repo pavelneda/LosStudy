@@ -93,13 +93,6 @@ a {
 }
 
 
-.burger-menu {
-    display: none;
-}
-
-.cross {
-    display: none;
-}
 
 
 /*Container*/
@@ -137,3 +130,89 @@ a {
     padding: 0 60px;
 }
 
+@media (max-width: 1300px) {
+
+    /*Container*/
+    .container {
+        padding: 0 60px;
+    }
+
+    /*Section*/
+    .section-title {
+        font-size: 35px;
+    }
+
+    .section-text {
+        font-size: 24px;
+        margin: 15px 0;
+    }
+}
+
+@media (max-width: 1065px) {
+
+    /*Container*/
+    .container {
+        padding: 0 30px;
+    }
+
+    #root-inner {
+        padding-bottom: 183.5px;
+    }
+}
+
+
+@media (max-width: 992px) {
+
+    /*Container*/
+    .container {
+        padding: 0 30px;
+    }
+    
+}
+
+@media (max-width: 768px) {
+
+    /*Container*/
+    .container {
+        padding: 0 15px;
+    }
+
+    #root-inner {
+        padding-bottom: 243px;
+    }
+
+    /*Section*/
+    .section-title {
+        font-size: 32px;
+    }
+
+    .section-text {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    /*Section*/
+    .section-title {
+        font-size: 28px;
+    }
+
+    .section-text {
+        font-size: 20px;
+    }
+
+}
+
+@media (max-width: 425px) {
+
+    /*Section*/
+    .section-title {
+        font-size: 24px;
+    }
+
+    .section-text {
+        font-size: 18px;
+        line-height: 1.27;
+    }
+}

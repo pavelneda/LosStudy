@@ -8,9 +8,11 @@ import './course-page.css';
 import ApiService from "../../services/api-service";
 import Spinner from "../spinner/spinner";
 import LessonList from '../lessons-list/lessons-list';
+import ErrorIndicator from '../error-indicator/error-indicator';
 
 const CoursePage = () => {
     const { id } = useParams();
+    const [hasError, setHasError] = useState(false);
     const [course, setCourse] = useState(null);
     const [lessons, setLessons] = useState(null);
     const [isLoading, setLoading] = useState(true);
@@ -31,8 +33,12 @@ const CoursePage = () => {
                 const [lastLesson, lastTimeVideo] = loadCookies(sortedLessons);
                 setCurrentLesson(lastLesson)
                 setCurentTimeVideo(lastTimeVideo)
+                setLoading(false);})
+            .catch((error) => {
+                setHasError(error);
                 setLoading(false);
             });
+
     }, [id]);
 
     useEffect(() => {
@@ -121,6 +127,10 @@ const CoursePage = () => {
 
     if (isLoading) {
         return (<div className="course-page-spinner"><Spinner /></div>);
+    }
+
+    if (hasError) {
+        return (<ErrorIndicator error={hasError}/>);
     }
 
     return (

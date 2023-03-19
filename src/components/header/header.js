@@ -26,10 +26,6 @@ const Header = () => {
                             ukraine
                         </div>
                     </a>
-
-                    <div className="burger-menu"><i className="fa-solid fa-bars"></i></div>
-                    <div className="cross"><i className="fa-solid fa-xmark"></i></div>
-
                 </div>
 
                 <nav className="nav">

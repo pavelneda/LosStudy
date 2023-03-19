@@ -39,7 +39,7 @@
     border-radius: 20px 20px 0 0;
 }
 
-.courses-item:hover .courses-item-video-wrapper{
+.courses-item:hover .courses-item-video-wrapper {
     display: block;
 }
 
@@ -81,8 +81,8 @@
     opacity: 0.8;
 }
 
-.courses-skills li::first-letter{
-    text-transform:capitalize;
+.courses-skills li::first-letter {
+    text-transform: capitalize;
 }
 
 .courses-data {
@@ -124,3 +124,139 @@
     display: none;
 }
 
+@media (max-width: 1363px) {
+    /*Courses*/
+
+    .courses-list {
+        gap: 58px 58px;
+    }
+}
+
+@media (max-width: 1300px) {
+    /*Courses*/
+
+    .courses-title {
+        font-size: 50px;
+    }
+
+    .courses {
+        padding: 60px 0;
+    }
+
+    .courses-list {
+        margin: 60px 0;
+    }
+
+    .courses-name {
+        font-size: 31px;
+    }
+
+    .courses-exp {
+        font-size: 19px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .courses {
+        padding-top: 30px;
+    }
+
+    .courses-title {
+        font-size: 45px;
+    }
+
+    .courses-list {
+        margin: 40px 0;
+    }
+
+    .courses-name {
+        font-size: 29px;
+        margin-top: 25px;
+    }
+
+    .courses-exp {
+        font-size: 18px;
+    }
+
+    .courses-prof {
+        margin-bottom: 15px;
+        margin-top: 20px;
+    }
+
+}
+
+@media (max-width: 576px) {
+    .courses-title {
+        font-size: 40px;
+    }
+
+    .courses-skills,
+    .courses-data {
+        font-size: 17px;
+    }
+
+    .courses-name {
+        font-size: 26px;
+    }
+
+    .courses-exp {
+        font-size: 17px;
+    }
+
+    .courses-item {
+        width: 345px;
+    }
+
+    .courses-list {
+        gap: 33px 33px;
+    }
+
+    .courses-info {
+        padding-bottom: 85px;
+    }
+
+    .courses-btn {
+        font-size: 21px !important;
+        bottom: 25px;
+    }
+}
+
+@media (max-width: 425px) {
+
+    .courses-skills {
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    .courses-title {
+        font-size: 35px;
+    }
+
+    .courses-list {
+        margin: 25px 0;
+    }
+
+    .courses-name {
+        font-size: 24px;
+        margin-top: 20px;
+    }
+
+    .courses-exp {
+        font-size: 16px;
+    }
+
+    .courses-prof {
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+}
+
+@media (max-width: 375px) {
+
+    .courses-skills,
+    .courses-data {
+        font-size: 16px;
+    }
+}

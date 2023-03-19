@@ -35,6 +35,9 @@
     line-height: 1;
     vertical-align: top;
     margin-top: 5px;
+}
+
+.footer-link+.footer-link {
     margin-right: 20px;
 }
 
@@ -55,4 +58,58 @@
 
 .footer-icons:hover {
     color: #0085FF;
+}
+
+@media (max-width: 1065px) {
+    .footer-iner {
+        flex-wrap: wrap;
+    }
+
+    .footer-item {
+        width: 50%;
+    }
+
+    .footer-item:nth-child(2) {
+        order: 1;
+    }
+
+    .footer-item:nth-child(3) {
+        order: 1;
+        text-align: end;
+    }
+
+    .footer-item:nth-child(4) {
+        margin-bottom: 10px;
+        text-align: end;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-item {
+        width: 100%;
+        text-align: center;
+    }
+
+
+    .footer-item:nth-child(1) {
+        margin-bottom: 10px;
+    }
+
+    .footer-item:nth-child(3) {
+        order: -1;
+        text-align: center;
+    }
+
+    .footer-item:nth-child(4) {
+        text-align: center;
+        order: 2;
+    }
+
+    .footer-text-right {
+        text-align: center;
+    }
+
+    .footer-iner {
+        padding: 20px 0;
+    }
 }

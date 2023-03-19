@@ -27,7 +27,7 @@
     padding-top: 33%;
 }
 
-.react-player-not-found{
+.react-player-not-found {
     position: absolute;
     top: 0;
     left: 0;
@@ -63,8 +63,8 @@
     padding: 5% 0 0 0;
 }
 
-.course-page-lessons{
-    list-style:decimal;
+.course-page-lessons {
+    list-style: decimal;
     max-width: 100%;
     margin-left: -15px;
 }
@@ -76,7 +76,7 @@
     width: fit-content;
 }
 
-.course-page-lessons li + li {
+.course-page-lessons li+li {
     margin-top: 10px;
 }
 
@@ -90,7 +90,104 @@
     cursor: not-allowed;
 }
 
-.course-page-instruction{
+.course-page-instruction {
     opacity: 0.5;
     font-size: 0.8em;
+}
+
+@media (max-width: 1300px) {
+    .course-page-inner {
+        flex-direction: column;
+        align-items: center;
+        margin: 40px 0 0;
+    }
+
+    .course-page-inner .react-player-wrapper {
+        max-width: 70%;
+        margin-right: 0;
+        margin-bottom: 40px;
+        padding-top: 39%;
+    }
+
+    .course-page-instruction {
+        margin: 15px 0;
+    }
+
+    .course-page {
+        padding: 40px 0;
+    }
+
+    .course-page-text {
+        max-width: 100%;
+    }
+
+}
+
+@media (max-width: 992px) {
+    .course-page-text {
+        font-size: 24px;
+    }
+
+    .course-page-instruction {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .course-page {
+        padding: 30px 0;
+    }
+
+    .course-page-inner {
+        margin: 30px 0 0;
+    }
+
+    .course-page-inner .react-player-wrapper {
+        max-width: 100%;
+        margin-bottom: 20px;
+        padding-top: 56%;
+    }
+}
+
+@media (max-width: 576px) {
+    .course-page {
+        padding: 20px 0;
+    }
+
+    .course-page-inner {
+        margin: 20px 0 0;
+    }
+    
+    .course-page-text{
+        font-size: 20px;
+    }
+
+    .course-page-instruction{
+        font-size: 18px;
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 425px) {
+    .course-page-lessons{
+        font-size: 18px;
+    }
+
+    .course-page-lessons li+li{
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 375px) {
+    .course-page-text{
+        font-size: 18px;
+    }
+
+    .course-page-instruction{
+        font-size: 16px;
+    }
+
+    .course-page-lessons{
+        font-size: 16px;
+    }
 }

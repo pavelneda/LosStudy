@@ -6,7 +6,7 @@ export default class ApiService {
         const res = await fetch(`${this._apiBase}${url}`, requestOptions);
 
         if (!res.ok) {
-            throw new Error(`Could not fetch ${url}, received ${res.status}`)
+            throw new Error(`Received ${res.status}`)
         }
 
         return await res.json();
