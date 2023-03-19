@@ -61,7 +61,7 @@ This is a React component named `CoursePage` that renders a video player, list o
 
 ## Details
 
-### `CoursePage`
+### CoursePage
 - React component that fetches and displays a video player and a list of lessons, details of course
 - `useEffect` is used to fetch the course information using `ApiService`, and then sorting and setting the lessons state based on the order of lessons. Cookies are also used to save progress and then load this progress after the component mounts And is used to add a keydown event listener for changing `playbackRate` of video and to remove the listener and set Cookies before unmounting the component.
 -  `useBeforeunload` is used to set Cookies before unloading the page.
@@ -73,7 +73,7 @@ This is a React component named `CoursePage` that renders a video player, list o
 - `onLessonSelected` function will be called each time a new lesson is selected in `lessonsList`.
 
 
-# API Service Readme
+# API Service
 
 This is an implementation of the ApiService class that provides methods to interact with the Wisey API. The Wisey API provides information about courses and lessons available on the platform.
 
@@ -140,11 +140,11 @@ This method is used to transform a lesson object from the API into a format suit
 
 This is a React functional component that renders a pagination section for a list of courses. The component receives the following props:
 
--`coursesPerPage`: A number representing the number of courses to display per page.
--`totalCourses`: A number representing the total number of courses in the list.
--`paginate`: A callback function that will be called when a page number is clicked. It receives the number of the clicked page as an argument.
--`onClickNext`: A callback function that will be called when the "next" button is clicked.
--`onClickPrev`: A callback function that will be called when the "previous" button is clicked.
+- `coursesPerPage`: A number representing the number of courses to display per page.
+- `totalCourses`: A number representing the total number of courses in the list.
+- `paginate`: A callback function that will be called when a page number is clicked. It receives the number of the clicked page as an argument.
+- `onClickNext`: A callback function that will be called when the "next" button is clicked.
+- `onClickPrev`: A callback function that will be called when the "previous" button is clicked.
 
 The component calculates the total number of pages based on the `totalCourses` and `coursesPerPage` props. It then renders a list of page numbers as list items, using the `pageNumbers` array. The `paginate` function is called when a page number is clicked, passing the number of the clicked page as an argument.
 
