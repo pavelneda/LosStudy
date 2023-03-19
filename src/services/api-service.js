@@ -51,7 +51,7 @@ export default class ApiService {
     }
 
     _transformCourseForList = (course) => {
-        const { id, title, previewImageLink, meta: { courseVideoPreview, skills, lessonsCount, rating } } = course
+        const { id, title, lessonsCount, rating,previewImageLink, meta: { courseVideoPreview, skills } } = course
         return {
             id,
             title,
