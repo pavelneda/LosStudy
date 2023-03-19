@@ -28,35 +28,42 @@ const CoursePage = () => {
             .getCourse(id)
             .then((course) => {
                 setCourse(course);
-                const sortedLessons = [...course.lessons].sort((a, b) => a.order - b.order);
+                const sortedLessons = sortLessons(course.lessons);
                 setLessons(sortedLessons);
                 const [lastLesson, lastTimeVideo] = loadCookies(sortedLessons);
                 setCurrentLesson(lastLesson)
                 setCurentTimeVideo(lastTimeVideo)
-                setLoading(false);})
+            })
             .catch((error) => {
-                setHasError(error);
-                setLoading(false);
-            });
+                setHasError(error);})
+            .finally(() => setLoading(false))
 
     }, [id]);
+    
 
     useEffect(() => {
         currentDataRef.current = { curentLesson, curentTimeVideo };
     }, [curentTimeVideo, curentTimeVideo]);
 
     useEffect(() => {
+        // add event listener
         document.addEventListener('keydown', keyListener, true)
         return () => {
+            // remove event listener
             document.removeEventListener('keydown', keyListener, true)
+            // set cookies
             setCookies(currentDataRef.current.curentLesson, currentDataRef.current.curentTimeVideo);
         }
     }, [])
 
     useBeforeunload(() => setCookies(curentLesson, curentTimeVideo));
 
+    const sortLessons = (lessons) => {
+        return [...lessons].sort((a, b) => a.order - b.order);
+    };    
+
     const onReady = useCallback(() => {
-        if (!isLoading) {
+        if (!isLoading && currentDataRef.current) {
             playerRef.current.seekTo(currentDataRef.current.curentTimeVideo, "seconds");
         }
     }, [isLoading]);
@@ -83,7 +90,6 @@ const CoursePage = () => {
     }
 
     const setCookies = (lastLesson, lastTimeVideo) => {
-
         if (lastLesson !== '') {
             Cookies.set(id, JSON.stringify({
                 lastLesson: lastLesson,
@@ -119,18 +125,24 @@ const CoursePage = () => {
                     onProgress={({ playedSeconds }) => setCurentTimeVideo(playedSeconds)}
                 />
             );
-        else if (status == "locked")
-            return (<img src="/images/video-locked.jpg" alt="Video locked" className='react-player-not-found' />);
-        else
-            return (<img src="/images/video-not-found.jpg" alt="Not found" className='react-player-not-found' />);
+        return (
+            <img
+                src={
+                    status === "locked" ? "/images/video-locked.jpg" : "/images/video-not-found.jpg"
+                }
+                alt={status === "locked" ? "Video locked" : "Not found"}
+                className="react-player-not-found"
+            />
+        );
     }
+
 
     if (isLoading) {
         return (<div className="course-page-spinner"><Spinner /></div>);
     }
 
     if (hasError) {
-        return (<ErrorIndicator error={hasError}/>);
+        return (<ErrorIndicator error={hasError} />);
     }
 
     return (
@@ -165,3 +177,4 @@ const CoursePage = () => {
 }
 
 export default CoursePage;
+

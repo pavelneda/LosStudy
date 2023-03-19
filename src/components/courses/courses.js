@@ -14,14 +14,12 @@ function offset(el) {
     return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
 }
 
-function withParamsAndNavigate(Component) {
-    return props => <Component {...props} params={useParams()} />;
-}
-
-const withNavigateHook = (Component) => {
+const withNavigateAndParams = (Component) => {
     return (props) => {
         const navigation = useNavigate();
-        return <Component navigation={navigation} {...props} />
+        const params = useParams();
+        // Return the wrapped component with the navigation, params, and original props spread as additional props
+        return <Component params={params} navigation={navigation} {...props} />
     }
 }
 
@@ -37,27 +35,32 @@ class Courses extends Component {
     };
 
     componentDidMount() {
+        // Destructure the values passed down through props.
+        const { params, courseList, onCoursesLoaded } = this.props;
         let page = null;
-        if (!!this.props.params.page && Number.isInteger(parseInt(this.props.params.page)))
-            page = this.props.params.page;
-        if (!this.props.courseList)
-            this.apiService
-                .getAllCourses()
-                .then((courseList) => {
-                    this.props.onCoursesLoaded(courseList);
-                    if (page)
-                        this.setState({ currentPage: page })
-                });
-        else {
-            if (page)
-                this.setState({ currentPage: page })
-            else
-                this.updatePagination();
+
+        // Check if the params page is a number and an integer.
+        if (!!params.page && Number.isInteger(parseInt(params.page))) {
+            page = params.page;
         }
 
+        // If there is no course list data available, make an API call to fetch it.
+        if (!courseList)
+            this.apiService.getAllCourses()
+                .then((response) => onCoursesLoaded(response))
+                .then(() => { 
+                    // If a page number was provided, update the component state to reflect the current page.
+                    if (page) {
+                        this.setState({ currentPage: page });
+                    }
+                });
+        else {
+            if (page) this.setState({ currentPage: page })
+            else this.updatePagination();
+        }
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate() {
         if (!!document.location.pathname.slice(1) && this.state.currentPage != document.location.pathname.slice(1)) {
             this.setState({
                 currentPage: document.location.pathname.slice(1)
@@ -67,20 +70,23 @@ class Courses extends Component {
     }
 
     updatePagination = () => {
+        // Select the pagination element and calculate its coordinates
         const pagination = document.querySelector('.pagination');
         const coordPagination = offset(pagination);
 
-        document.querySelectorAll(".pagination-number").forEach(item => {
-            if (item.classList.contains("active"))
-                item.classList.remove("active")
-        });
-        document.querySelector(`.pagination-number[data-number="${this.state.currentPage}"]`)
-            .classList.add("active");
+        // Remove the 'active' class from the previously active page number
+        const activePage = document.querySelector(".pagination-number.active");
+        activePage && activePage.classList.remove("active");
+
+        // Add the 'active' class to the current page number
+        const currentPage = document.querySelector(`.pagination-number[data-number="${this.state.currentPage}"]`);
+        currentPage && currentPage.classList.add("active");
 
         if (this._coord) {
             window.scrollBy(0, coordPagination.top - this._coord.top);
         }
 
+        // Set the current coordinates to the updated pagination element's coordinates
         this._coord = coordPagination;
     }
 
@@ -88,16 +94,23 @@ class Courses extends Component {
         this.props.navigation(`/${pageNumber}`);
         this.setState({ currentPage: pageNumber });
     }
+
     nextPage = () => this.setState((state) => {
+        // Check if the currentPage does not equal the last page
         if (state.currentPage != Math.ceil(this.props.courseList.length / state.coursesPerPage)) {
+            // Navigation to the next page using the navigation prop
             this.props.navigation(`/${parseInt(state.currentPage) + 1}`);
+            // Return the updated state with the new currentPage value
             return { currentPage: parseInt(state.currentPage) + 1 }
         }
     });
 
     prevPage = () => this.setState((state) => {
+        // Check if the currentPage does not equal the first page
         if (state.currentPage != 1) {
+            // Navigation to the previous page using the navigation prop
             this.props.navigation(`/${parseInt(state.currentPage) - 1}`);
+            // Return the updated state with the new currentPage value
             return { currentPage: parseInt(state.currentPage) - 1 }
         }
     });
@@ -145,6 +158,7 @@ class Courses extends Component {
 
         const { coursesPerPage, currentPage } = this.state;
         const { isLoading, courseList } = this.props
+
         if (isLoading) {
             return (<div className="courses-spinner"><Spinner /></div>);
         }
@@ -152,6 +166,7 @@ class Courses extends Component {
         const lastCourseIndex = currentPage * coursesPerPage;
         const firstCourseIndex = lastCourseIndex - coursesPerPage;
         const currentCourses = courseList.slice(firstCourseIndex, lastCourseIndex)
+
         const items = this.renderItems(currentCourses);
 
         return (
@@ -176,4 +191,4 @@ class Courses extends Component {
     }
 }
 
-export default withParamsAndNavigate(withNavigateHook(Courses));
+export default withNavigateAndParams(Courses);
